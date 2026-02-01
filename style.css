@@ -1,0 +1,423 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, cursive;
+  background: linear-gradient(180deg, #ffe6ef, #fff0f6);
+  color: #6b1c3c;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  position: relative;
+  z-index: 10;
+}
+
+h1 {
+  color: hotpink;
+  font-size: 3rem;
+  margin: 24px 0;
+}
+
+/* PHOTOS TOP */
+.top-photos {
+  display: flex;
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.top-photos img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 14px 35px rgba(255,105,180,.45);
+  animation: float 4s ease-in-out infinite;
+}
+
+.top-photos img:nth-child(1){transform:rotate(-4deg);}
+.top-photos img:nth-child(3){transform:rotate(4deg);}
+
+/* BUTTONS */
+.buttons { margin-top: 18px; }
+
+button {
+  padding: 14px 32px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+#yes-btn {
+  background: hotpink;
+  color: white;
+  box-shadow: 0 10px 25px rgba(255,105,180,.55);
+}
+
+#no-btn {
+  background: #f1f1f1;
+  position: absolute;
+}
+
+/* LOVE BUTTON */
+.love-button {
+  background: linear-gradient(135deg, #ff6b9d, #ff1493, #ff69b4);
+  color: white;
+  padding: 18px 45px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(255, 105, 180, 0.6),
+              0 6px 15px rgba(255, 20, 147, 0.4),
+              inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+.love-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.8),
+              0 8px 20px rgba(255, 20, 147, 0.5),
+              inset 0 2px 5px rgba(255, 255, 255, 0.4);
+}
+
+.love-button:active {
+  transform: scale(0.98);
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 12px 30px rgba(255, 105, 180, 0.6),
+                0 6px 15px rgba(255, 20, 147, 0.4),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 15px 35px rgba(255, 105, 180, 0.8),
+                0 8px 18px rgba(255, 20, 147, 0.6),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* LETTER */
+.letter {
+  background: linear-gradient(135deg, #ffffff 0%, #fff5f9 100%);
+  max-width: 680px;
+  padding: 45px 50px;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(255,105,180,.3),
+              0 8px 20px rgba(255,105,180,.2);
+  position: relative;
+  z-index: 11;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.letter-content {
+  text-align: left;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.letter-content p {
+  color: #5a1a2e;
+  font-size: 1.05rem;
+  margin: 0 0 22px 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.letter-content p:last-of-type {
+  margin-bottom: 0;
+}
+
+.letter-signature {
+  text-align: center !important;
+  font-weight: 500;
+  color: #d63384 !important;
+  margin-top: 25px !important;
+  font-size: 1.1rem !important;
+}
+
+.letter .love-button {
+  margin-top: 25px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* HEART POPUP */
+.hidden { 
+  display: none !important; 
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.heart-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(139, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.heart-popup:not(.hidden) {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.heart-box {
+  position: relative;
+  width: min(90vw, 650px);
+  aspect-ratio: 1 / 1;
+  animation: popup .6s ease forwards, beat 1.5s infinite;
+}
+
+.heart-photos {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  right: 8%;
+  bottom: 12%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+}
+
+/* Organic collage-style positioning for each photo */
+.heart-photos img {
+  position: absolute;
+  object-fit: cover;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(255, 105, 180, 0.4);
+  transition: transform 0.3s ease;
+}
+
+/* Photo 1 - Top left */
+.heart-photos img:nth-child(1) {
+  width: 28%;
+  height: 22%;
+  top: 0;
+  left: 5%;
+  transform: rotate(-8deg);
+  z-index: 1;
+}
+
+/* Photo 2 - Top center */
+.heart-photos img:nth-child(2) {
+  width: 30%;
+  height: 24%;
+  top: 2%;
+  left: 35%;
+  transform: rotate(5deg);
+  z-index: 2;
+}
+
+/* Photo 3 - Top right */
+.heart-photos img:nth-child(3) {
+  width: 26%;
+  height: 20%;
+  top: 0;
+  right: 8%;
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+
+/* Photo 4 - Middle left */
+.heart-photos img:nth-child(4) {
+  width: 32%;
+  height: 26%;
+  top: 22%;
+  left: 0;
+  transform: rotate(6deg);
+  z-index: 2;
+}
+
+/* Photo 5 - Middle center */
+.heart-photos img:nth-child(5) {
+  width: 34%;
+  height: 28%;
+  top: 24%;
+  left: 32%;
+  transform: rotate(-4deg);
+  z-index: 3;
+}
+
+/* Photo 6 - Middle right */
+.heart-photos img:nth-child(6) {
+  width: 30%;
+  height: 24%;
+  top: 20%;
+  right: 2%;
+  transform: rotate(7deg);
+  z-index: 2;
+}
+
+/* Photo 7 - Lower left */
+.heart-photos img:nth-child(7) {
+  width: 28%;
+  height: 22%;
+  top: 48%;
+  left: 8%;
+  transform: rotate(-6deg);
+  z-index: 1;
+}
+
+/* Photo 8 - Lower center-left */
+.heart-photos img:nth-child(8) {
+  width: 30%;
+  height: 24%;
+  top: 50%;
+  left: 30%;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+
+/* Photo 9 - Lower center-right */
+.heart-photos img:nth-child(9) {
+  width: 28%;
+  height: 22%;
+  top: 48%;
+  right: 10%;
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+
+/* Photo 10 - Bottom center */
+.heart-photos img:nth-child(10) {
+  width: 32%;
+  height: 26%;
+  top: 70%;
+  left: 34%;
+  transform: rotate(3deg);
+  z-index: 2;
+}
+
+/* Hover effect for photos */
+.heart-photos img:hover {
+  transform: scale(1.1) rotate(0deg) !important;
+  z-index: 6;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(255, 105, 180, 0.6);
+}
+
+.heart-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8)) 
+          drop-shadow(0 0 25px rgba(255, 20, 147, 0.6))
+          brightness(1.1);
+  animation: heartGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes heartGlow {
+  0% {
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8)) 
+            drop-shadow(0 0 25px rgba(255, 20, 147, 0.6))
+            brightness(1.1);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 1)) 
+            drop-shadow(0 0 35px rgba(255, 20, 147, 0.8))
+            brightness(1.15);
+  }
+}
+
+/* FLOWERS */
+.falling-flower {
+  position: fixed;
+  top: -10vh;
+  pointer-events: none;
+  z-index: 0;
+  animation: fall linear;
+}
+
+/* ANIMATIONS */
+@keyframes fall {
+  to { transform: translateY(120vh) rotate(360deg); }
+}
+
+@keyframes float {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+
+@keyframes popup {
+  from { transform: scale(.6); opacity:0; }
+  to { transform: scale(1); opacity:1; }
+}
+
+@keyframes beat {
+  0%{transform:scale(1);}
+  30%{transform:scale(1.05);}
+  60%{transform:scale(1);}
+}
+
+@media(max-width:600px){
+  h1{font-size:2.2rem;}
+  .top-photos img{width:130px;height:130px;}
+  .heart-box{width:min(90vw, 420px);}
+  .heart-photos{
+    top: 8%;
+    left: 10%;
+    right: 10%;
+    bottom: 15%;
+  }
+  /* Scale down photos for mobile */
+  .heart-photos img {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(255, 105, 180, 0.3);
+  }
+  .heart-photos img:nth-child(1) { width: 26%; height: 20%; }
+  .heart-photos img:nth-child(2) { width: 28%; height: 22%; }
+  .heart-photos img:nth-child(3) { width: 24%; height: 18%; }
+  .heart-photos img:nth-child(4) { width: 30%; height: 24%; }
+  .heart-photos img:nth-child(5) { width: 32%; height: 26%; }
+  .heart-photos img:nth-child(6) { width: 28%; height: 22%; }
+  .heart-photos img:nth-child(7) { width: 26%; height: 20%; }
+  .heart-photos img:nth-child(8) { width: 28%; height: 22%; }
+  .heart-photos img:nth-child(9) { width: 26%; height: 20%; }
+  .heart-photos img:nth-child(10) { width: 30%; height: 24%; }
+  /* Love button mobile styles */
+  .love-button {
+    padding: 14px 32px;
+    font-size: 1.2rem;
+  }
+  /* Letter mobile styles */
+  .letter {
+    max-width: 90vw;
+    padding: 30px 25px;
+    border-radius: 20px;
+  }
+  .letter-content p {
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+    line-height: 1.8;
+  }
+  .letter-signature {
+    font-size: 1rem !important;
+    margin-top: 20px !important;
+  }
+}
